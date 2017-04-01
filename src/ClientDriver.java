@@ -17,6 +17,26 @@ public class ClientDriver {
 
         myClient.connect(ip, port);
 
+
+        // create thread to listen for message asynchronously
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+             while(true) {
+                 try {
+                     String message = myClient.receive();
+                     System.out.println("Received message: " + message);
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                     System.err.println("IOException when attempting to receive a message from server. Likely a closed connection");
+                     break;
+                 }
+             }
+            }
+        }).start();
+
+
+        // send all inputs to server
         Scanner in = new Scanner(System.in);
 
         while(true) {
@@ -25,8 +45,6 @@ public class ClientDriver {
 
             try {
                 myClient.send(line);
-                String message = myClient.recieve();
-                System.out.println("Recieved message: " + message);
             } catch(IOException e) {
                 e.printStackTrace();
                 System.err.println("IOException when attempting to send a message to server. Likely a closed connection");

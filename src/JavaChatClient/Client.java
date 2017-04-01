@@ -29,11 +29,10 @@ public class Client {
         if(connection == null) {
             throw new IllegalStateException("There is no connection...");
         }
-        System.out.println("Sending message: " + message);
         out.println(message);
     }
 
-    public String recieve() throws IOException {
+    public String receive() throws IOException {
         if(connection == null) {
             throw new IllegalStateException("There is no connection...");
         }
