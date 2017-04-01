@@ -25,17 +25,21 @@ public class Client {
         }
     }
 
-    public String send(String message) throws IOException {
+    public void send(String message) throws IOException {
         if(connection == null) {
             throw new IllegalStateException("There is no connection...");
         }
-        System.out.println("Sendind message: " + message);
+        System.out.println("Sending message: " + message);
         out.println(message);
-        String recieved = in.readLine();
-        System.out.println("Recieved: " + recieved);
-
-        return recieved;
     }
 
+    public String recieve() throws IOException {
+        if(connection == null) {
+            throw new IllegalStateException("There is no connection...");
+        }
+
+        String message = in.readLine();
+        return message;
+    }
 
 }
