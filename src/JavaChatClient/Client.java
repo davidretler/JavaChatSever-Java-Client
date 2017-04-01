@@ -38,6 +38,7 @@ public class Client {
         }
 
         String message = in.readLine();
+        if(message == null) throw new IOException();
         return message;
     }
 
